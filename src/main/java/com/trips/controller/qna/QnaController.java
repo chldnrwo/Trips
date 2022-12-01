@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
+import com.trips.domain.qna.PageInfo;
 import com.trips.domain.qna.QnaDto;
 import com.trips.service.qna.QnaService;
 
@@ -51,8 +50,12 @@ public class QnaController {
 	@GetMapping("QnaList")
 	public void QnaList(
 			@RequestParam(name="page",defaultValue = "1")int page,
-			Model model) {
-		List<QnaDto> QnaList = service.listQna(page);
+			@RequestParam(name="t",defaultValue = "all")String type,
+			@RequestParam(name="q",defaultValue = "")String keyword,
+			Model model,
+			PageInfo pageInfo
+			) {
+		List<QnaDto> QnaList = service.listQna(page,type,keyword,pageInfo);
 		
 		model.addAttribute("qnaList", QnaList);
 	}
@@ -64,6 +67,7 @@ public class QnaController {
 			int id) {
 		QnaDto qna = service.get(id);
 		model.addAttribute("qna",qna);
+	
 	}
 	@GetMapping("QnaModify")
 	public void QnaModify(int id,Model model) {

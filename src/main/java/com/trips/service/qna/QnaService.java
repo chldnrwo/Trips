@@ -37,13 +37,42 @@ public class QnaService {
 		return cnt;
 	}
 
-	public List<QnaDto> listQna(int page) {
+	public List<QnaDto> listQna(int page,String type,String keyword,PageInfo pageInfo) {
 		// TODO Auto-generated method stub
-		// page정보
+		// page 다음부터 records 개를 나타내기 위한 코드
 		int records = 10;
 		int offset = (page-1) * records;
 		
-		return qnaMapper.list(offset,records);
+		//총 레코드 수
+		int countAll = qnaMapper.countAll(type,"%"+keyword+"%"); // SELECT COUNT(*) FROM QNA
+		int lastPage = (countAll -1) /records +1; // 마지막 페이지 번호
+		
+		int leftPageNumber= (page-1) / 10*10 +1; // 왼쪽 시작 페이지 번호 페이지 부터 10개
+		int rightPageNumber = leftPageNumber + 9; // 오른쪽 끝 페이지 번호 
+		rightPageNumber=Math.min(rightPageNumber, lastPage);
+		//이전버튼 유무
+		boolean hasPrevButton = page >10;
+		//다음버튼유무
+		boolean hasNextButton = page <= ((lastPage-1) /10*10);
+		
+		// 이전버튼 눌렀을 때 가는 페이지 번호
+		int jumpPrevPageNumber = (page-1)/ 10* 10 -9;
+		int jumpNextPageNumber = (page-1) / 10*10+11;
+		
+		pageInfo.setHasPrevButton(hasPrevButton);
+		pageInfo.setHasNextButton(hasNextButton);
+		pageInfo.setJumpPrevPageNumber(jumpPrevPageNumber);
+		pageInfo.setJumpNextPageNumber(jumpNextPageNumber);
+		
+		pageInfo.setCurrentPageNumber(page);
+		pageInfo.setLeftPageNumber(leftPageNumber);
+		pageInfo.setRightPageNumber(rightPageNumber);
+		pageInfo.setLastPageNumber(lastPage);
+	
+		
+		pageInfo.setLastPageNumber(lastPage);
+		
+		return qnaMapper.list(offset,records,type,"%"+keyword+"%"); // offset = "1"-1 = 0 / records = 10;
 	}
 
 	public QnaDto get(int id) {

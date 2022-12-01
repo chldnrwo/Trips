@@ -53,6 +53,78 @@
 	</table>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col">
+				<nav class="mt-3"aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				  <%-- 맨 앞 버튼은 1페이지가 아니면 존재 --%>
+				  
+				  <c:if test="${pageInfo.currentPageNumber ne 1 }">
+				  <c:url value="/qna/QnaList" var="qnaListLink">
+				  	<c:param name="page" value="1"></c:param>
+				  	<c:param name="q" value="${param.q }"></c:param>
+				  	<c:param name="t" value="${param.t }"></c:param>
+				  </c:url>
+				  <li class="page-item">
+				  <a href="${qnaListLink }" class="page-link">맨앞</a>
+				  </li>
+				  </c:if>
+				  
+				  <c:if test="${pageInfo.hasPrevButton }">
+				  	<c:url value="/qna/QnaList" var="qnaListLink">
+				  		<c:param name="page" value="${pageInfo.jumpPrevPageNumber }"></c:param>
+				  		<c:param name="q" value="${param.q }"></c:param>
+				  		<c:param name="t" value="${param.t }"></c:param>
+				  	</c:url>
+				  	<li class="page-item">
+				  		<a href="${qnaListLink }" class="page-link">이전</a>
+				  	</li>
+				  </c:if>
+				  
+				  
+				  	<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
+				  		<c:url value="/qna/QnaList" var="qnaListLink">
+							<c:param name="page" value="${pageNumber }"></c:param>
+							<c:param name="q" value="${param.q }"></c:param>	
+							<c:param name="t" value="${param.t }"></c:param>			  		
+				  		</c:url>
+					    <li class="page-item
+					    
+					    <%-- 현재 페이지에 active 클래스 추가 --%>
+					    ${pageInfo.currentPageNumber eq pageNumber ? 'active' : '' }
+					    
+					    "><a class="page-link" href="${qnaListLink }">${pageNumber }</a>
+					    </li>
+				  	</c:forEach>
+				  	
+				  	<c:if test="${pageInfo.hasNextButton }">
+				  		<c:url value="/qna/QnaList" var="qnaListLink">
+				  			<c:param name="page" value="${pageInfo.jumpNextPageNumber }"></c:param>
+				  			<c:param name="q" value="${param.q }"></c:param>
+				  			<c:param name="t" value="${param.t }"></c:param>
+				  		</c:url>
+				  			<li class="page-item">
+				  				<a href="${qnaListLink }" class="page-link">다음</a>
+				  			</li>
+				  	</c:if>
+				  	
+				  	<!-- 맨 뒤 버튼은 마지막 페이지가 아니면 존재 -->
+				  	<c:if test="${pageInfo.currentPageNumber ne pageInfo.lastPageNumber }">
+				  		<c:url value="/qna/QnaList" var="qnaListLink">
+				  			<c:param value="${pageInfo.lastPageNumber }" name="page"></c:param>
+				  		  	<c:param name="q" value="${param.q }"></c:param>
+				  		  	<c:param name="t" value="${param.t }"></c:param>
+				  		</c:url>
+				  	<li class="page-item">
+				  		<a href="${qnaListLink }" class="page-link">맨뒤</a>
+				  	</li>
+				  	
+				  	</c:if>
+				  	
+				  </ul>
+				</nav>
+			</div>
+		</div>
 	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
