@@ -19,6 +19,7 @@ SELECT
 	Q_inserted inserted
 FROM QNA
 ORDER BY Q_ID DESC
+LIMIT #{offset},#{records} 
 </select>
 
 <select id="select" resultType="com.trips.domain.qna.QnaDto">
@@ -34,7 +35,23 @@ WHERE
 	Q_ID=#{id}
 </select>
 
-	<!-- OR 다음 컬럼명이 들어감 -->
+<update id="update">
+UPDATE QNA
+SET
+	Q_TITLE = #{title},
+	Q_CONTENT  = #{content},
+	M_ID  = #{memberId}
+WHERE
+ Q_ID=#{id}
+</update>
+
+<delete id="delete">
+DELETE FROM QNA
+WHERE Q_ID =#{id}
+
+</delete>
+
+	<!-- OR,WHERE 다음 컬럼명이 들어감 -->
 
 	
 	

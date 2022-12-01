@@ -34,12 +34,13 @@ public class QnaController {
 			RedirectAttributes rttr) {
 	
 		// business logic
+		// alert 문의글 작성 알림
 		int cnt = service.QnaRegister(qna);
 		
 		if (cnt == 1) {
-			rttr.addFlashAttribute("message", "새 게시물이 등록되었습니다.");
+			rttr.addFlashAttribute("message", "문의글이 등록되었습니다.");
 		} else {
-			rttr.addFlashAttribute("message", "새 게시물이 등록되지 않았습니다.");
+			rttr.addFlashAttribute("message", "문의글이 등록되지 않았습니다.");
 		}
 		
 		// /board/list로 redirect
@@ -48,8 +49,10 @@ public class QnaController {
 	}
 
 	@GetMapping("QnaList")
-	public void QnaList(Model model) {
-		List<QnaDto> QnaList = service.listQna();
+	public void QnaList(
+			@RequestParam(name="page",defaultValue = "1")int page,
+			Model model) {
+		List<QnaDto> QnaList = service.listQna(page);
 		
 		model.addAttribute("qnaList", QnaList);
 	}
@@ -57,11 +60,47 @@ public class QnaController {
 	@GetMapping("QnaGet")
 	public void QnaGet(
 			Model model,
-//			@RequestParam(name="id")
+			@RequestParam(name="id")
 			int id) {
 		QnaDto qna = service.get(id);
 		model.addAttribute("qna",qna);
 	}
+	@GetMapping("QnaModify")
+	public void QnaModify(int id,Model model) {
+		QnaDto qna = service.get(id);
+		model.addAttribute("qna",qna);
+	}
+	@PostMapping("QnaModify")
+	public String QnaModify(QnaDto qna,RedirectAttributes rttr) {
+		service.update(qna);
+		int cnt = service.update(qna);
+		if (cnt == 1) {
+			rttr.addFlashAttribute("message", "문의글이 수정되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "문의글이 수정되지 않았습니다.");
+		}
+		
+		return "redirect:/qna/QnaList";
+	}
+	@PostMapping("QnaRemove")
+	public String QnaRemove(int id,RedirectAttributes rttr) {
+		// alert 문의글 삭제 알림
+		int cnt= service.remove(id);
+		if (cnt == 1) {
+			rttr.addFlashAttribute("message", "문의글이 삭제되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "문의글이 삭제되지 않았습니다.");
+		}
+		
+		return "redirect:/qna/QnaList";
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 
 

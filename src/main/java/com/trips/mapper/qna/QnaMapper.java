@@ -9,9 +9,13 @@ public interface QnaMapper {
 
 	int insert(QnaDto qna);
 
-	List<QnaDto> list();
+	List<QnaDto> list(int offset,int records);
 
 	QnaDto select(int id);
+
+	int update(QnaDto qna);
+
+	int delete(int id);
 
 
 	

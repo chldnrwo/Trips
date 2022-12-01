@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -12,11 +13,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
+<my:navBar1 active="register"></my:navBar1>
 	<div class="container-md">
 		<div class="row">
 			<div class="col">
-				<h1>게시물 작성</h1>
+				<h1>문의하기</h1>
 				<form id="registerForm1" action="" method="post" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="" class="form-label">제목</label>

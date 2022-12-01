@@ -37,15 +37,31 @@ public class QnaService {
 		return cnt;
 	}
 
-	public List<QnaDto> listQna() {
+	public List<QnaDto> listQna(int page) {
 		// TODO Auto-generated method stub
-		return qnaMapper.list();
+		// page정보
+		int records = 10;
+		int offset = (page-1) * records;
+		
+		return qnaMapper.list(offset,records);
 	}
 
 	public QnaDto get(int id) {
 		// TODO Auto-generated method stub
 		return qnaMapper.select(id);
 	}
+
+	public int update(QnaDto qna) {
+		// TODO Auto-generated method stub
+		return qnaMapper.update(qna);
+	}
+
+	public int remove(int id) {
+		// TODO Auto-generated method stub
+		return qnaMapper.delete(id);
+	}
+
+
 
 
 	
