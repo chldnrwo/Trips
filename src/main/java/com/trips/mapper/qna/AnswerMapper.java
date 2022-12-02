@@ -10,6 +10,12 @@ public interface AnswerMapper {
 
 	List<AnswerDto> selectAnswerByqnaId(int qnaId);
 
+	int deleteById(int id);
+
+	AnswerDto selectById(int id);
+
+	int update(AnswerDto answer);
+
 
 
 }

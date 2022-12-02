@@ -26,6 +26,42 @@ ORDER BY
 	
 
 </select>
+<!-- 댓글 삭제  -->
+<delete id="deleteById">
+DELETE FROM ANSWER
+WHERE A_ID=#{id}
+</delete>
+
+<!-- 댓글 수정 시 댓글 읽어오기 -->
+<select id="selectById" resultType="com.trips.domain.qna.AnswerDto">
+SELECT
+	A_ID id,
+	Q_ID qnaId,
+	A_CONTENT content,
+	A_inserted inserted
+FROM
+	ANSWER
+WHERE
+	A_ID =#{id}
+</select>
+
+<!-- 댓글 수정 -->	
+<update id="update">
+UPDATE ANSWER
+SET
+	A_CONTENT =#{content}
+WHERE
+	A_ID = #{id}
+
+</update>
+
+
+
+
+
+
+
+
 
 
 

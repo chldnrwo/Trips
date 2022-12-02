@@ -25,6 +25,21 @@ public class AnswerService {
 		return mapper.selectAnswerByqnaId(qnaId);
 	}
 
+	public int removeById(int id) {
+		// TODO Auto-generated method stub
+		return mapper.deleteById(id);
+	}
+
+	public AnswerDto getById(int id) {
+		// TODO Auto-generated method stub
+		return mapper.selectById(id);
+	}
+
+	public int modify(AnswerDto answer) {
+		// TODO Auto-generated method stub
+		return mapper.update(answer);
+	}
+
 	
 
 }
