@@ -31,6 +31,11 @@
 				제목 <input type="text" value="${qna.title }" readonly> <br>
 				본문
 				<textarea readonly>${qna.content }</textarea>
+				
+				<!-- 이미지 출력 -->				
+						<div>
+							<input type="file">
+						</div>		
 				<br> 작성자 <input type="text" value="${qna.memberId }" readonly>
 				<br> 작성일시 <input type="datetime-local" value="${qna.inserted}"
 					readonly>
