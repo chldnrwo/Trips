@@ -64,6 +64,7 @@ public class CustomConfig {
 		http.formLogin().loginPage("/jjhLogin/login").defaultSuccessUrl("/home", true);
 		http.logout().logoutUrl("/jjhLogin/logout");
 		http.csrf().disable();
+		 http.exceptionHandling().accessDeniedPage("/jjhLogin/accessDenied");
 		return http.build();
 	}
 
