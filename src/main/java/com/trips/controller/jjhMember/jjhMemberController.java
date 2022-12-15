@@ -10,15 +10,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.trips.domain.jjhMember.jjhMemberDto;
 import com.trips.service.jjhMember.jjhMemberService;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+
+@Slf4j
 @Controller
 @RequestMapping("jjhLogin")
+//Model 객체에 loginMember라는 키값으로 객체가 추가되면 해당 객체를 세션 스코프에 추가하는 어노테이션이다.
+@SessionAttributes("loginMember")
 public class jjhMemberController {
 
 	@Autowired
@@ -30,10 +40,32 @@ public class jjhMemberController {
 		
 	}
 	
+	@RequestMapping(value = "/login", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView login(ModelAndView model,
+			@RequestParam(required = false, value = "id") String id, @RequestParam(required = false, value ="password") String password) {
+
+		log.info("{}, {}", id, password);	
+		
+		jjhMemberDto loginMember = service.login(id, password);
+		
+		System.out.println("loginmember : " + loginMember);
+		
+		if(loginMember != null) {
+			model.addObject("loginMember", loginMember);
+			model.setViewName("redirect:/");
+		} else {
+			model.addObject("msg", "아이디나 비밀번호가 일치하지 않습니다.");
+
+		}		
+		
+		return model;
+	}
+	
+	/*
 	@GetMapping("login")
 	public void login() {
 
-	}
+	}*/
 	
 	@GetMapping("loginLegacy")
 	public void loginL() {

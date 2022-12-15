@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class testDto {
 	private int memberId;
-	private int id;
+	private String id;
 	private int boardNumber;
 	private int cartId;
 	private Date addDate; 

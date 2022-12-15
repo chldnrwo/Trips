@@ -18,6 +18,7 @@ public class jjhMemberService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	
 	public int insert(jjhMemberDto member) {
 		
 		String pw = member.getM_PASSWORD();
@@ -35,5 +36,14 @@ public class jjhMemberService {
 	public jjhMemberDto getByEmail(String email) {
 		// TODO Auto-generated method stub
 		return memberMapper.selectByEmail(email);
+	}
+
+	public jjhMemberDto login(String id, String password) {
+		jjhMemberDto jjhMemberDto = null;
+		
+	    System.out.println("here: " + jjhMemberDto);
+	    
+	    return jjhMemberDto != null &&
+	    		passwordEncoder.matches(password, jjhMemberDto.getM_PASSWORD()) ? jjhMemberDto : null;
 	}
 }

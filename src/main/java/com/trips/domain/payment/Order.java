@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Order {
 	   
-	private int id; // o_order_id
+	private String id; // o_order_id
 	private String memberId; // m_id
 	private int boardNumber; // o_b_no
 	private int cartId; // o_cart_id

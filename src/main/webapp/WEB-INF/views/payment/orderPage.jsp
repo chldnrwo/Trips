@@ -27,7 +27,7 @@
 </head>
 <body>
 	<div class="container">
-			
+			<input value="${id }">
 		<div class="row no-gutters qnas" style="text-align: center;">
 			<h1 class="page-header">주문하기</h1>
 			<table class="table table-hover" style="width: 70%; margin: auto; border-bottom: 1px solid #D5D5D5;">
@@ -85,13 +85,13 @@
 				<div class="form-group">
 					<label for="inputEmail" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" id="email" placeholder="Email" name="email" value="${loginMember.email}">
+						<input type="email" class="form-control" id="email" placeholder="Email" name="email" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputTel" class="col-sm-2 control-label">Tel</label>
 					<div class="col-sm-8">
-						<input type="tel" class="form-control" id="phone" placeholder="Tel" name="phone" value="${loginMember.phone}">
+						<input type="tel" class="form-control" id="phone" placeholder="Tel" name="phone" value="">
 					</div>
 				</div>		
 			</div>
@@ -117,6 +117,7 @@
 
 	<script type="text/javascript">
 	
+	console.log("session객체");
 	// import 결제 api 
 	 IMP.init('imp93088520');
 function requestPay() {
