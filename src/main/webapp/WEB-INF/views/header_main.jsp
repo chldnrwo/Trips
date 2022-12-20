@@ -71,7 +71,7 @@
               
               <li><a href="${path}/ydsBoard/list">ONOFF</a></li>
               <li><a href="${path}/qna/QnaList">QNA</a></li>
-              <li><a href="${path}/jjhLogin/login">HOSTPAGE</a></li>
+              <li><a href="${path}/host/hostPage">HOSTPAGE</a></li>
     
 
             </ul>
