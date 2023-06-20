@@ -1,3 +1,3 @@
-FROM openjdk:8-jdk-alpine
-COPY target/myapp-0.0.1-SNAPSHOT.jar /app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM tomcat:8.0-alpine
+COPY target/myapp-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/app.war
+CMD ["catalina.sh", "run"]
